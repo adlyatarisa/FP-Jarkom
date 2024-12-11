@@ -8,7 +8,7 @@
 | Harwinda | 5027231079 |
 
 ## Topologi dan Subnetting
-![topologi](images/image.png)
+![topo](images/image.png)
 
 ## Pembagian IP
 ![IP](images/image2.png)
