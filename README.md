@@ -7,161 +7,191 @@
 | Adlya Isriena Aftarisya | 5027231066 |
 | Harwinda | 5027231079 |
 
-## Topologi dan subnetting
+## Topologi dan Subnetting
 ![topologi](images/image.png)
 
 ## Pembagian IP
-![alt text](images/image2.png)
+![IP](images/image2.png)
 
-## Konfigurasi dan Routing
-### Router ARA Tech
+## Konfigurasi
+### Router Gedung Utama
 Interfaces
 ```
-# A1
-ip address 10.66.0.1 255.255.255.252
+interface FastEthernet0/0
+ ip address 10.66.1.213 255.255.255.252
+ no shut
 
-# A3
-ip address 10.66.0.132 255.255.255.252
-
-# A5
-ip address 10.66.2.1 255.255.255.252
-
-# A7
-ip address 10.66.2.69 255.255.255.252
-
-# A9
-ip address 10.66.2.135 255.255.255.252
+interface FastEthernet0/1
+ ip address 10.66.1.193 255.255.255.252
+ no shut
+ 
+interface Ethernet0/1/0
+ ip address 10.66.1.205 255.255.255.252
+ no shut
+ 
+interface Ethernet0/2/0
+ ip address 10.66.1.209 255.255.255.252
+ no shut
+ 
+interface FastEthernet1/0
+ ip address 10.66.1.197 255.255.255.252
+ no shut
+ 
+interface FastEthernet1/1
+ ip address 10.66.1.201 255.255.255.252
+ no shut
 ```
-Static Route
-### Lt 1
+Static Routes
+```
+ip route 10.66.0.0 255.255.255.128 10.66.1.194 
+ip route 10.66.1.0 255.255.255.192 10.66.1.202 
+ip route 10.66.1.64 255.255.255.192 10.66.1.206 
+ip route 10.66.1.128 255.255.255.192 10.66.1.210 
+ip route 10.66.0.128 255.255.255.128 10.66.1.198 
+ip route 10.66.3.0 255.255.255.0 10.66.4.2 
+ip route 10.66.3.0 255.255.255.0 10.66.1.214 
+ip route 10.66.2.0 255.255.255.252 10.66.1.214 
+```
+### Router Lt 1
 Interfaces
 ```
-# A1
-ip address 10.66.0.2 255.255.255.252
-
-# A2
-ip address 10.66.0.5 255.255.255.128
+interface FastEthernet0/0
+ ip address 10.66.1.194 255.255.255.252
+ no shut
+ 
+interface FastEthernet0/1
+ ip address 10.66.0.1 255.255.255.128
+ no shut
 ```
-Static Route
+Static Routes
 ```
-routing taro sini
+ip route 10.66.0.128 255.255.255.128 10.66.1.193 
+ip route 10.66.1.0 255.255.255.192 10.66.1.193 
+ip route 10.66.1.64 255.255.255.192 10.66.1.193 
+ip route 10.66.1.128 255.255.255.192 10.66.1.193 
+ip route 10.66.1.196 255.255.255.252 10.66.1.193 
+ip route 10.66.1.200 255.255.255.252 10.66.1.193 
+ip route 10.66.1.204 255.255.255.252 10.66.1.193 
+ip route 10.66.1.208 255.255.255.252 10.66.1.193 
+ip route 10.66.2.0 255.255.255.252 10.66.1.193 
+ip route 10.66.1.212 255.255.255.252 10.66.1.193 
+ip route 10.66.3.0 255.255.255.192 10.66.1.193 
 ```
-
-### Ruang server dan Datacenter
-```
-ip address 10.66.0.6 255.255.255.128
-```
-
-### Departemen IT
-```
-ip address 10.66.0.7 255.255.255.128
-```
-
-### Departemen HR
-```
-ip address 10.66.0.8 255.255.255.128
-```
-
-### Lt 2
+### Route Lt 2
 Interfaces
 ```
-# A3
-ip address 10.66.0.134 255.255.255.252
+interface FastEthernet0/0
+ ip address 10.66.1.198 255.255.255.252
+ no shut
 
-# A4
-ip address 10.66.0.137 255.255.255.128
+interface FastEthernet0/1
+ ip address 10.66.0.129 255.255.255.128
+ no shut
 ```
-Static Route
+Static Routes
 ```
-taro sini
+ip route 10.66.0.0 255.255.255.128 10.66.1.197 
+ip route 10.66.1.0 255.255.255.192 10.66.1.197 
+ip route 10.66.1.64 255.255.255.192 10.66.1.197 
+ip route 10.66.1.128 255.255.255.192 10.66.1.197 
+ip route 10.66.1.192 255.255.255.252 10.66.1.197 
+ip route 10.66.1.200 255.255.255.252 10.66.1.197 
+ip route 10.66.1.204 255.255.255.252 10.66.1.197 
+ip route 10.66.1.208 255.255.255.252 10.66.1.197 
+ip route 10.66.1.212 255.255.255.252 10.66.1.197 
+ip route 10.66.2.0 255.255.255.252 10.66.1.197 
+ip route 10.66.3.0 255.255.255.192 10.66.1.197 
 ```
-### Departemen R&D
-```
-ip address 10.66.0.138 255.255.255.128
-```
-
-### Departemen Pemasaran
-```
-ip address 10.66.0.139 255.255.255.128
-```
-
-### Departemen Penjualan
-```
-ip address 10.66.0.140 255.255.255.128
-```
-
-### Lt 3
+### Route Lt 3
 Interfaces
 ```
-# A5
-ip address 10.66.2.2 255.255.255.252
+interface FastEthernet0/0
+ ip address 10.66.1.202 255.255.255.252
+ no shut
 
-# A6
-ip address 10.66.2.5 255.255.255.192
+interface FastEthernet0/1
+ ip address 10.66.1.1 255.255.255.192
+ no shut
 ```
-Static Route
+Static Routes
 ```
-taro sini
+ip route 10.66.0.0 255.255.255.128 10.66.1.201 
+ip route 10.66.0.128 255.255.255.128 10.66.1.201 
+ip route 10.66.1.64 255.255.255.192 10.66.1.201 
+ip route 10.66.1.128 255.255.255.192 10.66.1.201 
+ip route 10.66.1.192 255.255.255.252 10.66.1.201 
+ip route 10.66.1.196 255.255.255.252 10.66.1.201 
+ip route 10.66.1.204 255.255.255.252 10.66.1.201 
+ip route 10.66.1.208 255.255.255.252 10.66.1.201 
+ip route 8.8.8.0 255.255.255.0 10.66.1.201 
+ip route 10.66.1.212 255.255.255.252 10.66.1.201 
+ip route 10.66.2.0 255.255.255.252 10.66.1.201 
+ip route 10.66.3.0 255.255.255.192 10.66.1.201 
 ```
-
-### Departemen Keuangan
-```
-ip address 10.66.2.6 255.255.255.192
-```
-
-### Departemen Legal
-```
-ip address 10.66.2.7 255.255.255.192
-```
-
-### Lt 4
+### Route Lt 4
 Interfaces
 ```
-# A7
-ip address 10.66.2.70 255.255.255.252
+interface FastEthernet0/0
+ ip address 10.66.1.206 255.255.255.252
+ no shut 
 
-# A8
-ip address 10.66.2.73 255.255.255.192
+interface FastEthernet0/1
+ ip address 10.66.1.65 255.255.255.192
+ no shut
 ```
-Static Route
+Static Routes
 ```
-taro sini
+ip route 10.66.0.0 255.255.255.128 10.66.1.205 
+ip route 10.66.0.128 255.255.255.128 10.66.1.205 
+ip route 10.66.1.0 255.255.255.192 10.66.1.205 
+ip route 10.66.1.128 255.255.255.192 10.66.1.205 
+ip route 10.66.1.192 255.255.255.252 10.66.1.205 
+ip route 10.66.1.196 255.255.255.252 10.66.1.205 
+ip route 10.66.1.200 255.255.255.252 10.66.1.205 
+ip route 10.66.1.208 255.255.255.252 10.66.1.205 
+ip route 10.66.1.212 255.255.255.252 10.66.1.205 
+ip route 10.66.2.0 255.255.255.252 10.66.1.205 
+ip route 10.66.3.0 255.255.255.192 10.66.1.205 
 ```
-
-### Departemen Manajemen
-```
-ip address 10.66.2.74 255.255.255.192
-```
-
-### Departemen Customer Support
-```
-ip addrress 10.66.2.75 255.255.255.192
-```
-
-### Lt 5
+### Route Lt 5
 Interfaces
 ```
-# A9
-ip address 10.66.2.138 255.255.255.252
+interface FastEthernet0/0
+ ip address 10.66.1.210 255.255.255.252
+ no shut
 
-# A10
-ip address 10.66.2.141 255.255.255.192
+interface FastEthernet0/1
+ ip address 10.66.1.129 255.255.255.192
+ no shut
 ```
-Static Route
+Static Routes
 ```
-taro sini
-```
-### Departemen Cybersecurity
-```
-ip address 10.66.2.142 255.255.255.192
+ip route 10.66.0.0 255.255.255.128 10.66.1.209 
+ip route 10.66.0.128 255.255.255.128 10.66.1.209 
+ip route 10.66.1.0 255.255.255.192 10.66.1.209 
+ip route 10.66.1.64 255.255.255.192 10.66.1.209 
+ip route 10.66.1.192 255.255.255.252 10.66.1.209 
+ip route 10.66.1.196 255.255.255.252 10.66.1.209 
+ip route 10.66.1.200 255.255.255.252 10.66.1.209 
+ip route 10.66.1.204 255.255.255.252 10.66.1.209 
+ip route 10.66.1.212 255.255.255.252 10.66.1.209 
+ip route 10.66.2.0 255.255.255.252 10.66.1.209 
+ip route 10.66.3.0 255.255.255.192 10.66.1.209 
 ```
 
-### Departemen HR
+## Konfigurasi DHCP
+> Departemen R&D, Pemasaran, dan Penjualan akan menggunakan DHCP untuk mengalokasikan alamat IP secara dinamis kepada perangkat mereka. Konfigurasikan DHCP server pada router dan pastikan perangkat di tiga departemen tersebut mendapatkan IP otomatis sesuai dengan rentang yang telah ditentukan. 
+
+### Router Lt 2
 ```
-ip address 10.66.2.143 255.255.255.192
+ip dhcp pool A4
+network 10.66.0.128 255.255.255.128
+default-router 10.66.0.129
+dns-server 8.8.8.8
 ```
 
-### Ruang Meeting
-```
-ip address 10.66.2.144 255.255.255.192
-```
+### R&D, Pemasaran, Penjualan
+![config](images/image3.png)
+
+Ubah konfigurasi IP dari static ke DHCP agar dapat mendapatkan IP address dari DHCP server
+
