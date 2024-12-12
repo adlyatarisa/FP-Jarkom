@@ -195,3 +195,88 @@ dns-server 8.8.8.8
 
 Ubah konfigurasi IP dari static ke DHCP agar dapat mendapatkan IP address dari DHCP server
 
+### Testing
+pada router Lt 2 buka CLI dan jalankan command berikut untuk mengetahui apakah client sudah mendapatkan IP dari DHCP Server
+```
+show ip dhcp binding
+```
+![testing-DHCP](images/image5.png)
+
+## Konfigurasi NAT
+>Perusahaan membutuhkan akses ke internet untuk semua perangkat yang terhubung. Konfigurasikan NAT Overload (PAT) pada router utama untuk memungkinkan perangkat dalam jaringan lokal mengakses internet, misalnya dengan melakukan ping ke 8.8.8.8.
+
+### Router Gedung Utama
+Tambahkan command `ip nat outside` atau `ip nat inside` di setiap interface
+```
+interface FastEthernet0/0
+ ip address 10.66.1.213 255.255.255.252
+ ip nat outside
+ 
+interface FastEthernet0/1
+ ip address 10.66.1.193 255.255.255.252
+ ip nat inside
+ 
+interface Ethernet0/1/0
+ ip address 10.66.1.205 255.255.255.252
+ ip nat inside
+ 
+interface Ethernet0/2/0
+ ip address 10.66.1.209 255.255.255.252
+ ip nat inside
+ 
+interface FastEthernet1/0
+ ip address 10.66.1.197 255.255.255.252
+ ip nat inside
+ 
+interface FastEthernet1/1
+ ip address 10.66.1.201 255.255.255.252
+ ip nat inside
+```
+
+Jalankan command berikut untuk menerapkan NAT pada semua alamat IP sumber dari jaringan internal agar dapat mengakses internet:
+```
+access-list 1 permit any 
+ip nat inside source list 1 interface FastEthernet0/0 overload
+```
+### Router ISP
+```
+interface FastEthernet0/0
+ ip address 10.66.1.214 255.255.255.252
+ 
+interface FastEthernet0/1
+ ip address 8.8.8.1 255.255.255.0
+ 
+interface Ethernet0/1/0
+ ip address 10.66.2.1 255.255.255.252
+```
+### Server 8.8.8.8
+```
+IP Address: 8.8.8.8
+netmask: 255.255.255.0
+```
+### Server 8.8.8.9
+```
+IP Address: 8.8.8.9
+netmask: 255.255.255.0
+```
+### Server 8.8.8.10
+```
+IP Address: 8.8.8.8
+netmask: 255.255.255.0
+```
+
+Pada **Server 8.8.8.8** Jangan lupa nyalakan DNS Service dan tambahkan domain `www.google.com` dengan IP `8.8.8.8`, `cisco.com` dengan IP `8.8.8.9`, dan `facebook.com` dengan IP `8.8.8.10`
+
+![server](images/image4.png)
+
+### semua nodes
+Tambahkan DNS server di CLI router 
+```
+ip name-server 8.8.8.8
+```
+atau kalau di client langsung saja di config
+
+![config-DNS](images/image6.png)
+
+jangan lupa juga untuk menambahkan **static route ke 8.8.8.0** pada setiap nodes
+
