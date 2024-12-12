@@ -179,6 +179,29 @@ ip route 10.66.2.0 255.255.255.252 10.66.1.209
 ip route 10.66.3.0 255.255.255.192 10.66.1.209 
 ```
 
+### Router Cabang Lain
+```
+interface FastEthernet0/0
+ ip address 10.66.2.2 255.255.255.252
+ 
+interface FastEthernet0/1
+ ip address 10.66.3.1 255.255.255.0
+
+ip route 10.66.0.0 255.255.255.128 10.66.2.1 
+ip route 10.66.0.128 255.255.255.128 10.66.2.1 
+ip route 10.66.1.0 255.255.255.192 10.66.2.1 
+ip route 10.66.1.64 255.255.255.192 10.66.2.1 
+ip route 10.66.1.128 255.255.255.192 10.66.2.1 
+ip route 10.66.1.192 255.255.255.252 10.66.2.1 
+ip route 10.66.1.196 255.255.255.252 10.66.2.1 
+ip route 10.66.1.200 255.255.255.252 10.66.2.1 
+ip route 10.66.1.204 255.255.255.252 10.66.2.1 
+ip route 10.66.1.208 255.255.255.252 10.66.2.1 
+ip route 8.8.8.0 255.255.255.0 10.66.2.1 
+ip route 10.66.1.212 255.255.255.252 10.66.4.1 
+ip route 10.66.1.212 255.255.255.252 10.66.2.1 
+```
+
 ## Konfigurasi DHCP
 > Departemen R&D, Pemasaran, dan Penjualan akan menggunakan DHCP untuk mengalokasikan alamat IP secara dinamis kepada perangkat mereka. Konfigurasikan DHCP server pada router dan pastikan perangkat di tiga departemen tersebut mendapatkan IP otomatis sesuai dengan rentang yang telah ditentukan. 
 
@@ -280,3 +303,27 @@ atau kalau di client langsung saja di config
 
 jangan lupa juga untuk menambahkan **static route ke 8.8.8.0** pada setiap nodes
 
+## Konfigurasi GRE Tunnel
+### Router Utama
+```
+int Tunnel0
+ip addr 10.66.4.1 255.255.255.252
+tunnel source FastEthernet0/0
+tunnel destination 10.66.4.2
+ip route 10.66.3.0 255.255.255.0 10.66.4.2
+```
+### Router Cabang lain
+```
+int Tunnel0
+ip addr 10.66.4.2 255.255.255.252
+tunnel source FastEthernet0/0
+tunnel destination 10.66.4.1
+ip route 10.66.1.212 255.255.255.252 10.66.4.1
+```
+### Testing
+coba dari router utama ping ke cabang lain dengan gateway tunnel pada cabang lain
+![ping](images/image7.png)
+
+coba lagi dari sebaliknya dengan gateway tunnel pada router utama
+
+![ping](images/image8.png)
