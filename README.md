@@ -303,6 +303,11 @@ atau kalau di client langsung saja di config
 
 jangan lupa juga untuk menambahkan **static route ke 8.8.8.0** pada setiap nodes
 
+### Testing
+coba ping 8.8.8.8, www.google.com, 8.8.8.9, 8.8.8.10 dari client
+
+![alt text](images/image9.png)
+
 ## Konfigurasi GRE Tunnel
 ### Router Utama
 ```
