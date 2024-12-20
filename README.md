@@ -332,3 +332,7 @@ coba dari router utama ping ke cabang lain dengan gateway tunnel pada cabang lai
 coba lagi dari sebaliknya dengan gateway tunnel pada router utama
 
 ![ping](images/image8.png)
+
+## Demo
+video demo dapat diakses di link berikut: 
+https://drive.google.com/drive/folders/1kfZ5_kOO6JeO99774hslnzTuU2R5lfvK?usp=sharing
